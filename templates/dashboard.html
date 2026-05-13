@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedApply – Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="dashboard-body">
+
+  <header class="dash-header">
+    <a href="/" class="nav-brand">
+      <i class="fab fa-linkedin"></i>
+      <span>LinkedApply</span>
+    </a>
+    <div class="header-info">
+      <span class="status-pill">
+        <span class="status-dot"></span> Ready
+      </span>
+    </div>
+  </header>
+
+  <main class="dash-main">
+
+    <aside class="dash-sidebar">
+      <div class="panel" id="panel-profile">
+        <div class="panel-header">
+          <span class="step-badge">01</span>
+          <h2>Your Profile</h2>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Your Full Name</label>
+            <input type="text" id="applicant-name" placeholder="e.g. Rahul Sharma" />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Gmail Address</label>
+            <input type="email" id="sender-email" placeholder="yourname@gmail.com" />
+          </div>
+          <div class="form-group">
+            <label>
+              <i class="fas fa-key"></i> Gmail App Password
+              <a href="https://myaccount.google.com/apppasswords" target="_blank" class="help-link">
+                Get it here <i class="fas fa-external-link-alt"></i>
+              </a>
+            </label>
+            <div class="password-wrap">
+              <input type="password" id="sender-password" placeholder="16-character app password" />
+              <button class="toggle-pw" onclick="togglePassword()">
+                <i class="fas fa-eye" id="pw-icon"></i>
+              </button>
+            </div>
+            <small class="hint">
+              <i class="fas fa-info-circle"></i>
+              Not your regular Gmail password. Enable 2FA then create App Password.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-resume">
+        <div class="panel-header">
+          <span class="step-badge">02</span>
+          <h2>Upload Resume</h2>
+        </div>
+        <div class="panel-body">
+          <div class="upload-zone" id="upload-zone">
+            <input type="file" id="resume-file" accept=".pdf,.doc,.docx" hidden />
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <p>Drag & drop or <span class="upload-link" onclick="document.getElementById('resume-file').click()">browse file</span></p>
+            <small>PDF, DOC, DOCX — Max 5MB</small>
+          </div>
+          <div class="upload-status" id="upload-status" style="display:none;">
+            <i class="fas fa-check-circle" style="color:#34a853"></i>
+            <span id="upload-filename">resume.pdf</span>
+            <button class="btn-xs danger" onclick="removeResume()">Remove</button>
+          </div>
+          <button class="btn-primary full" id="btn-upload" onclick="uploadResume()">
+            <i class="fas fa-upload"></i> Upload Resume
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <section class="dash-content">
+
+      <div class="panel" id="panel-search">
+        <div class="panel-header">
+          <span class="step-badge">03</span>
+          <h2>Search Jobs & Extract Emails</h2>
+        </div>
+        <div class="panel-body">
+          <div class="search-row">
+            <div class="form-group flex1">
+              <label><i class="fas fa-briefcase"></i> Job Keyword</label>
+              <input type="text" id="job-keyword" placeholder="e.g. Python Developer, Data Analyst, UI Designer" />
+            </div>
+            <div class="form-group w200">
+              <label><i class="fas fa-tag"></i> Job Type</label>
+              <select id="job-type">
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="internship">Internship</option>
+                <option value="remote">Remote</option>
+                <option value="freelance">Freelance</option>
+                <option value="contract">Contract</option>
+              </select>
+            </div>
+            <div class="form-group btn-align">
+              <button class="btn-primary" id="btn-search" onclick="searchJobs()">
+                <i class="fas fa-search"></i> Search Jobs
+              </button>
+            </div>
+          </div>
+
+          <div class="extractor-box">
+            <div class="extractor-header" onclick="toggleExtractor()">
+              <span><i class="fas fa-magic"></i> Manual Email Extractor (Paste any text)</span>
+              <i class="fas fa-chevron-down" id="extractor-chevron"></i>
+            </div>
+            <div class="extractor-body" id="extractor-body" style="display:none;">
+              <textarea id="paste-text" placeholder="Paste any job description, LinkedIn post, or company page text here..."></textarea>
+              <button class="btn-secondary" onclick="extractEmails()">
+                <i class="fas fa-at"></i> Extract Emails
+              </button>
+              <div id="extracted-result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-results" style="display:none;">
+        <div class="panel-header results-header">
+          <div>
+            <span class="step-badge">04</span>
+            <h2>Job Results & Recruiter Emails</h2>
+          </div>
+          <div class="results-meta">
+            <span class="badge-count" id="badge-jobs">0 Jobs</span>
+            <span class="badge-count emails" id="badge-emails">0 Emails</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="select-controls">
+            <label class="checkbox-label">
+              <input type="checkbox" id="select-all" onchange="toggleSelectAll()" />
+              Select All Emails
+            </label>
+            <button class="btn-secondary small" onclick="clearSelection()">Clear</button>
+            <span class="selected-count" id="selected-count">0 selected</span>
+          </div>
+          <div id="jobs-container"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-send" style="display:none;">
+        <div class="panel-header">
+          <span class="step-badge">05</span>
+          <h2>Send Applications</h2>
+        </div>
+        <div class="panel-body">
+          <div class="send-summary" id="send-summary"></div>
+          <button class="btn-primary large full" id="btn-send" onclick="sendApplications()">
+            <i class="fas fa-paper-plane"></i> Send Application Emails
+          </button>
+          <p class="send-note">
+            <i class="fas fa-shield-alt"></i>
+            Emails sent via Gmail SMTP. Password is never stored. 1-second delay between emails.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-log" style="display:none;">
+        <div class="panel-header">
+          <span class="step-badge done"><i class="fas fa-check"></i></span>
+          <h2>Sending Results</h2>
+        </div>
+        <div class="panel-body" id="results-log"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="toast" id="toast">
+    <i class="fas fa-info-circle" id="toast-icon"></i>
+    <span id="toast-msg">Message here</span>
+  </div>
+
+  <div class="loading-overlay" id="loading-overlay" style="display:none;">
+    <div class="loader-card">
+      <div class="spinner"></div>
+      <p id="loading-text">Searching for jobs...</p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
