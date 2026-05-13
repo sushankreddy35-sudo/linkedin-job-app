@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedApply – Smart Job Application Automation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="landing-body">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fab fa-linkedin"></i>
+      <span>LinkedApply</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="/dashboard" class="btn-nav">Launch App</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-bolt"></i> Powered by Python Flask
+      </div>
+      <h1 class="hero-title">
+        Apply to <span class="gradient-text">100 Jobs</span><br />
+        in Minutes, Not Days
+      </h1>
+      <p class="hero-subtitle">
+        LinkedApply finds job listings, extracts recruiter emails, and sends
+        personalized application emails with your resume — all automatically.
+      </p>
+      <div class="hero-cta">
+        <a href="/dashboard" class="btn-primary">
+          <i class="fas fa-rocket"></i> Start Applying Now
+        </a>
+        <a href="#how-it-works" class="btn-ghost">
+          <i class="fas fa-play-circle"></i> See How It Works
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">10x</span>
+          <span class="stat-label">Faster Applications</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Automated</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">Free</span>
+          <span class="stat-label">Open Source</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dashboard-preview">
+        <div class="preview-topbar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="preview-title">LinkedApply Dashboard</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-row">
+            <i class="fab fa-linkedin preview-icon"></i>
+            <div class="preview-line long"></div>
+          </div>
+          <div class="preview-row">
+            <i class="fas fa-search preview-icon accent"></i>
+            <div class="preview-line medium"></div>
+          </div>
+          <div class="preview-row">
+            <i class="fas fa-envelope preview-icon success"></i>
+            <div class="preview-line short"></div>
+            <span class="preview-badge">3 emails found</span>
+          </div>
+          <div class="preview-row">
+            <i class="fas fa-paper-plane preview-icon warning"></i>
+            <div class="preview-line medium"></div>
+            <span class="preview-badge sent">Sent ✓</span>
+          </div>
+          <div class="preview-progress">
+            <div class="preview-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-header">
+      <span class="section-tag">What It Does</span>
+      <h2>Everything You Need to Land Your Dream Job</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f0fe">
+          <i class="fas fa-search" style="color:#4285f4"></i>
+        </div>
+        <h3>Smart Job Search</h3>
+        <p>Enter any keyword and job type. The app searches real job boards and returns live listings automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fce8e6">
+          <i class="fas fa-at" style="color:#ea4335"></i>
+        </div>
+        <h3>Email Extraction</h3>
+        <p>Automatically scans job descriptions and extracts recruiter and HR email addresses using smart regex.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e6f4ea">
+          <i class="fas fa-paper-plane" style="color:#34a853"></i>
+        </div>
+        <h3>Auto Email Sending</h3>
+        <p>Sends professional, personalized application emails with your resume via Gmail SMTP.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff3e0">
+          <i class="fas fa-file-pdf" style="color:#ff6d00"></i>
+        </div>
+        <h3>Resume Upload</h3>
+        <p>Upload your PDF or DOCX resume once. It gets attached to every application email automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f3e8fd">
+          <i class="fas fa-shield-alt" style="color:#9c27b0"></i>
+        </div>
+        <h3>Secure & Private</h3>
+        <p>Your credentials are used only for the current session and never stored on any server.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f5e9">
+          <i class="fas fa-code" style="color:#2e7d32"></i>
+        </div>
+        <h3>Open Source Python</h3>
+        <p>Built with Flask, beginner-friendly Python code. Easy to understand, modify, and deploy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header">
+      <span class="section-tag">Step by Step</span>
+      <h2>How LinkedApply Works</h2>
+    </div>
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Enter Your Details</h3>
+          <p>Fill in your name, Gmail credentials, job keyword, and job type.</p>
+        </div>
+      </div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>Upload Resume</h3>
+          <p>Upload your PDF/DOCX resume. Attached to every email automatically.</p>
+        </div>
+      </div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>Search & Extract</h3>
+          <p>Click Search Jobs. App scans job boards and extracts recruiter emails.</p>
+        </div>
+      </div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3>Send Applications</h3>
+          <p>Select emails and click Send. Applications delivered instantly!</p>
+        </div>
+      </div>
+    </div>
+    <div class="cta-center">
+      <a href="/dashboard" class="btn-primary large">
+        <i class="fas fa-rocket"></i> Open Dashboard
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand"><i class="fab fa-linkedin"></i> LinkedApply</div>
+    <p>Built with ❤️ using Python Flask · Web Development Internship Project</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
